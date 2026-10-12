@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { supabase } from '../../lib/supabase'
 import { slugify } from '../../lib/slug'
+import { compressImage } from '../../lib/image'
 import type { Wine, WineColor } from '../../lib/types'
 import { useAdhesions, useMyDomaine, useWine } from './queries'
 import { MediaSection } from './MediaSection'
@@ -61,12 +62,13 @@ function WineForm({ wine }: { wine?: Wine }) {
     const id = wine?.id ?? crypto.randomUUID()
     let labelPath = wine?.label_image_path ?? null
     if (label) {
-      const ext = label.name.split('.').pop()?.toLowerCase() || 'jpg'
+      const photo = await compressImage(label)
+      const ext = photo.name.split('.').pop()?.toLowerCase() || 'jpg'
       labelPath = `${domaine!.id}/${id}/etiquette.${ext}`
-      const up = await supabase.storage.from('labels').upload(labelPath, label, { upsert: true, contentType: label.type })
+      const up = await supabase.storage.from('labels').upload(labelPath, photo, { upsert: true, contentType: photo.type })
       if (up.error) {
         setBusy(false)
-        return setError("La photo de l'étiquette n'a pas pu être envoyée (5 Mo maximum).")
+        return setError("La photo de l'étiquette n'a pas pu être envoyée. Essaie avec une autre photo, au format JPG ou PNG.")
       }
     }
     const fields = {
