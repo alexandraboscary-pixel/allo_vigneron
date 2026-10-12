@@ -38,3 +38,5 @@
   box-shadow: 0 6px 18px rgba(255, 61, 110, 0.4);
   border: 4px solid var(--bg);
 }
+/* Icône agrandie : on compense la hauteur pour garder les libellés alignés */
+.large { margin: -2px 0 -1px; }

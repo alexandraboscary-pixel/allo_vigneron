@@ -23,12 +23,16 @@ const icons = {
   book: <path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4-6 4V4a1 1 0 0 1 1-1z" />,
 }
 
-// Les dessins détaillés gardent un trait plus fin pour rester lisibles à 24 px
-const fineStroke = new Set<keyof typeof icons>(['vignerons'])
+// Les dessins détaillés sont affichés plus grands, avec un trait plus fin, pour rester lisibles
+const large = new Set<keyof typeof icons>(['vignerons'])
 
 function Icon({ name }: { name: keyof typeof icons }) {
+  const big = large.has(name)
   return (
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth={fineStroke.has(name) ? 1.6 : 2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      viewBox={big ? '1.5 5.5 21 16' : '0 0 24 24'} width={big ? 36 : 24} height={big ? 27 : 24} className={big ? styles.large : undefined}
+      fill="none" stroke="currentColor" strokeWidth={big ? 1.5 : 2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+    >
       {icons[name]}
     </svg>
   )
