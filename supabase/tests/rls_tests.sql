@@ -3,7 +3,10 @@
 -- Crée des données de test, joue chaque scénario avec le bon rôle, nettoie tout,
 -- puis affiche un tableau : une ligne par test, colonne « ok » à true attendue partout.
 
+-- Table temporaire (disparaît en fin de session). RLS activée pour l'éditeur Supabase ;
+-- le script y écrit en tant que propriétaire, donc sans restriction.
 create temp table if not exists rls_results (n serial, test text, ok boolean, detail text);
+alter table rls_results enable row level security;
 truncate rls_results;
 
 do $$
