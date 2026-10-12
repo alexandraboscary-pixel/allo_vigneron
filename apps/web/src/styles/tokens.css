@@ -1,0 +1,15 @@
+/* Design system Allô Vino (README section 9). Toute nouvelle couleur ou police doit être validée. */
+:root {
+  --bg: #FFFFFF;      --surface: #F6F0F8;  --ink: #24102C;   --muted: #7A6A80;  --line: #ECE3EF;
+  --pink: #FF3D6E;    /* action principale, bouton scan */
+  --plum: #2A1033;    /* écran scan, carte audio */
+  --sun: #FFC93C;     /* mot en cours de lecture, succès */
+  --blush: #FFE3EA;   /* puces "3 mots" */
+  --font: "Bricolage Grotesque", ui-rounded, "Segoe UI", system-ui, sans-serif;
+
+  --app-max: 440px;
+  --tabbar-h: 64px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#170A1C; --surface:#24132B; --ink:#F7EEF8; --muted:#B39FBA; --line:#34213C; --blush:#3A1A2A; }
+}

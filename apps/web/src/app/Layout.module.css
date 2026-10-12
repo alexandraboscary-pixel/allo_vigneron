@@ -1,0 +1,14 @@
+.shell {
+  max-width: var(--app-max);
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.dark { background: var(--plum); color: #FFFFFF; }
+.main {
+  flex: 1;
+  padding: calc(env(safe-area-inset-top) + 20px) 20px calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 24px);
+}
+.dark p { color: rgba(255, 255, 255, 0.72); }
